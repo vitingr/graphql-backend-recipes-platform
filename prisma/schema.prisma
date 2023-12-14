@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  firstname          String
+  lastname           String
+  email              String   @unique
+  partner            Boolean  @default(false)
+  photo              String  
+  bio                String?
+  recipesCreated     String[]
+  recipesLiked       String[]
+  driverRecipeCreate Boolean  @default(false)
+  driverProfile      Boolean  @default(false)
+
+  // Relations
+  recipes Recipe[]
+}
+
+model Recipe {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  photo       String? @default("/assets/image.jpg")
+  qtdLikes    Int?    @default(0)
+  creatorId   String  @db.ObjectId
+  content     String
+  type        String?
+
+  // Relations
+  user User @relation(fields: [creatorId], references: [id])
+}
