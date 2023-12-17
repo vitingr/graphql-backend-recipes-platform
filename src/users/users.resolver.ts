@@ -3,6 +3,8 @@ import { CreateUser } from './dto/create-user';
 import { User } from './user-entity';
 import { UsersService } from './users.service';
 import { Resolver, Query, Mutation, Args, Parent, ResolveField } from '@nestjs/graphql';
+import { UpdateUser } from './dto/update-user';
+import { UpdateBio } from './dto/update-bio';
 
 @Resolver((of) => User)
 export class UsersResolver {
@@ -26,5 +28,15 @@ export class UsersResolver {
   @Mutation(returns => User)
   createNewUser(@Args('createUser') createUser: CreateUser): Promise<User> {
     return this.usersService.createNewUser(createUser)
+  }
+
+  @Mutation(returns => User)
+  updateUser(@Args('updateUser') updateUser: UpdateUser): Promise<User> {
+    return this.usersService.updateUser(updateUser)
+  }
+
+  @Mutation(returns => User)
+  updateBio(@Args('updateBio') updateBio: UpdateBio): Promise<User> {
+    return this.usersService.updateBio(updateBio)
   }
 }

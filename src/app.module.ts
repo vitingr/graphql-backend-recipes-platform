@@ -12,7 +12,7 @@ import { RecipesModule } from './recipes/recipes.module';
   imports: [GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-  }), UsersModule, UsersModule, RecipesModule],
+  }), UsersModule, RecipesModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

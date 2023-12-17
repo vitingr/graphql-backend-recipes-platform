@@ -3,6 +3,8 @@ import { PrismaService } from 'src/database/prisma.service';
 import { CreateUser } from './dto/create-user';
 import { User } from './user-entity';
 import { Recipe } from '@prisma/client';
+import { UpdateUser } from './dto/update-user';
+import { UpdateBio } from './dto/update-bio';
 
 @Injectable()
 export class UsersService {
@@ -36,4 +38,28 @@ export class UsersService {
     })
     return recipes
   }
+
+  updateUser(UpdateUser: UpdateUser): Promise<User> {
+    const updateUser = this.prisma.user.update({
+      where: {
+        id: UpdateUser.id
+      },
+      data: {
+        partner: true
+      }
+    })
+    return updateUser
+  }
+
+  updateBio(UpdateBio: UpdateBio): Promise<User> {
+    const updateBio = this.prisma.user.update({
+      where: {
+        id: UpdateBio.id
+      },
+      data: {
+        bio: UpdateBio.bio
+      }
+    })
+    return updateBio
+  } 
 }

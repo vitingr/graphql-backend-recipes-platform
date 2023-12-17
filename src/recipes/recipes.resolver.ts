@@ -10,6 +10,8 @@ export class RecipesResolver {
 
   @Mutation(() => Recipe)
   createRecipe(@Args('createRecipeInput') createRecipeInput: CreateRecipeInput) {
+    console.log(createRecipeInput)
+    console.log(this.createRecipe)
     return this.recipesService.create(createRecipeInput);
   }
 

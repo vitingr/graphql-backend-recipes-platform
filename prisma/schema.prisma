@@ -14,7 +14,7 @@ model User {
   lastname           String
   email              String   @unique
   partner            Boolean  @default(false)
-  photo              String  
+  photo              String
   bio                String?
   recipesCreated     String[]
   recipesLiked       String[]
@@ -26,13 +26,14 @@ model User {
 }
 
 model Recipe {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   description String
-  photo       String? @default("/assets/image.jpg")
-  qtdLikes    Int?    @default(0)
-  creatorId   String  @db.ObjectId
-  content     String
+  ingredients String[]
+  methods     String[]
+  photo       String?  @default("/assets/image.jpg")
+  qtdLikes    Int?     @default(0)
+  creatorId   String   @db.ObjectId
   type        String?
 
   // Relations

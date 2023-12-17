@@ -4,12 +4,13 @@
 
 type Recipe {
   id: String!
-  title: String!
+  title: String
   description: String!
+  ingredients: [String!]!
+  methods: [String!]!
   photo: String!
   qtdLikes: Int!
   creatorId: String!
-  content: String!
   type: String!
 }
 
@@ -38,6 +39,8 @@ type Query {
 
 type Mutation {
   createNewUser(createUser: CreateUser!): User!
+  updateUser(updateUser: UpdateUser!): User!
+  updateBio(updateBio: UpdateBio!): User!
   createRecipe(createRecipeInput: CreateRecipeInput!): Recipe!
   updateRecipe(updateRecipeInput: UpdateRecipeInput!): Recipe!
   removeRecipe(id: Int!): Recipe!
@@ -51,21 +54,32 @@ input CreateUser {
   photo: String
 }
 
+input UpdateUser {
+  id: String!
+}
+
+input UpdateBio {
+  id: String!
+  bio: String!
+}
+
 input CreateRecipeInput {
   title: String!
   description: String!
+  ingredients: [String!]!
+  methods: [String!]!
   photo: String
   creatorId: String!
-  String: String!
   type: String
 }
 
 input UpdateRecipeInput {
   title: String
   description: String
+  ingredients: [String!]
+  methods: [String!]
   photo: String
   creatorId: String
-  String: String
   type: String
   id: String!
 }

@@ -6,11 +6,17 @@ export class Recipe {
   @Field(type => String)
   id: string;
 
-  @Field()
+  @Field({nullable: true})
   title: string;
 
   @Field()
   description: string;
+
+  @Field(type => [String])
+  ingredients: string[];
+
+  @Field(type => [String])
+  methods: string[];
 
   @Field()
   photo: string;
@@ -20,9 +26,6 @@ export class Recipe {
 
   @Field()
   creatorId: string;
-
-  @Field()
-  content: string;
 
   @Field()
   type: string;

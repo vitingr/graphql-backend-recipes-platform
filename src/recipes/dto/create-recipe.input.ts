@@ -1,29 +1,26 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsAlpha } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsAlpha, isAlpha } from 'class-validator';
 
 @InputType()
 export class CreateRecipeInput {
-  @IsAlpha()
   @Field()
   title: string;
 
-  @IsAlpha()
   @Field()
   description: string;
 
-  @IsAlpha()
+  @Field(type => [String])
+  ingredients: string[];
+
+  @Field(type => [String])
+  methods: string[];
+
   @Field({nullable: true})
   photo: string;
 
-  @IsAlpha()
   @Field()
   creatorId: string;
 
-  @IsAlpha()
-  @Field()
-  String: string;
-
-  @IsAlpha()
   @Field({nullable: true})
   type: string;
 }
