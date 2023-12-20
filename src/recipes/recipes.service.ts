@@ -6,6 +6,7 @@ import { Recipe } from '@prisma/client';
 
 @Injectable()
 export class RecipesService {
+
   constructor(private prisma: PrismaService) {}
 
   create(createRecipeInput: CreateRecipeInput): Promise<Recipe> {
@@ -47,11 +48,10 @@ export class RecipesService {
   }
 
   getUserRecipes(id: string): Promise<Recipe[]> {
-    const userRecipes = this.prisma.recipe.findMany({
+    return this.prisma.recipe.findMany({
       where: {
         creatorId: id
       }
     })
-    return userRecipes
   }
 }

@@ -7,12 +7,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { RecipesModule } from './recipes/recipes.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-  }), UsersModule, RecipesModule],
+  }), UsersModule, RecipesModule, CommentsModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

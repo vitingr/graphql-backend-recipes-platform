@@ -1,5 +1,4 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { IsAlpha, isAlpha } from 'class-validator';
 
 @InputType()
 export class CreateRecipeInput {

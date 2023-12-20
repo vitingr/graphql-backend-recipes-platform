@@ -32,12 +32,32 @@ type User {
   getRecipes: [Recipe!]!
 }
 
+type Comment {
+  id: String!
+  recipeId: String!
+  creatorId: String!
+  creatorPhoto: String!
+  creatorName: String!
+  content: String!
+  qtdLikes: Int
+  likes: [String!]
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   getUser(email: String!): User!
   users: [User!]!
   recipes: [Recipe!]!
   recipe(id: String!): Recipe!
   getUserRecipes(id: String!): [Recipe!]!
+  comments: [Comment!]!
+  comment(id: String!): Comment!
+  findRecipeCommentaries(id: String!): [Comment!]!
 }
 
 type Mutation {
@@ -47,6 +67,9 @@ type Mutation {
   createRecipe(createRecipeInput: CreateRecipeInput!): Recipe!
   updateRecipe(updateRecipeInput: UpdateRecipeInput!): Recipe!
   removeRecipe(id: Int!): Recipe!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  removeComment(id: String!): Comment!
 }
 
 input CreateUser {
@@ -89,4 +112,25 @@ input UpdateRecipeInput {
   creatorName: String
   type: String
   id: String!
+}
+
+input CreateCommentInput {
+  recipeId: String!
+  creatorId: String!
+  creatorPhoto: String!
+  creatorName: String!
+  content: String!
+  qtdLikes: Int
+  likes: [String!]
+}
+
+input UpdateCommentInput {
+  recipeId: String
+  creatorId: String
+  creatorPhoto: String
+  creatorName: String
+  content: String
+  qtdLikes: Int
+  likes: [String!]
+  id: Int!
 }
