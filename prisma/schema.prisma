@@ -26,15 +26,17 @@ model User {
 }
 
 model Recipe {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  ingredients String[]
-  methods     String[]
-  photo       String?  @default("/assets/image.jpg")
-  qtdLikes    Int?     @default(0)
-  creatorId   String   @db.ObjectId
-  type        String?
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  ingredients  String[]
+  methods      String[]
+  photo        String?  @default("/assets/image.jpg")
+  qtdLikes     Int?     @default(0)
+  creatorId    String   @db.ObjectId
+  creatorPhoto String   @default("https://secure.gravatar.com/avatar/284c7d766ac6d1dbf5911b57f9c75a73?s=96&d=https%3A%2F%2Fstatic.teamtreehouse.com%2Fassets%2Fcontent%2Fdefault_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png&r=pg")
+  creatorName  String
+  type         String?
 
   // Relations
   user User @relation(fields: [creatorId], references: [id])

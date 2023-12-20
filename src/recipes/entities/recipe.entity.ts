@@ -28,5 +28,11 @@ export class Recipe {
   creatorId: string;
 
   @Field()
+  creatorPhoto: string;
+
+  @Field()
+  creatorName: string;
+
+  @Field()
   type: string;
 }

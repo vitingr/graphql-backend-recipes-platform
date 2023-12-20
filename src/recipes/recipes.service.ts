@@ -9,7 +9,6 @@ export class RecipesService {
   constructor(private prisma: PrismaService) {}
 
   create(createRecipeInput: CreateRecipeInput): Promise<Recipe> {
-    console.log(createRecipeInput)
     const newRecipe = this.prisma.recipe.create({
       data: createRecipeInput,
     });
@@ -23,27 +22,36 @@ export class RecipesService {
   findOne(id: string): Promise<Recipe> {
     return this.prisma.recipe.findUnique({
       where: {
-        id: id
-      }
-    })
+        id: id,
+      },
+    });
   }
 
   update(id: string, updateRecipeInput: UpdateRecipeInput): Promise<Recipe> {
     const updateRecipe = this.prisma.recipe.update({
       where: {
-        id: id
+        id: id,
       },
-      data: updateRecipeInput
-    })
-    return updateRecipe
+      data: updateRecipeInput,
+    });
+    return updateRecipe;
   }
 
   remove(id: string): Promise<Recipe> {
     const removedRecipe = this.prisma.recipe.delete({
       where: {
-        id: id
+        id: id,
+      },
+    });
+    return removedRecipe;
+  }
+
+  getUserRecipes(id: string): Promise<Recipe[]> {
+    const userRecipes = this.prisma.recipe.findMany({
+      where: {
+        creatorId: id
       }
     })
-    return removedRecipe
+    return userRecipes
   }
 }

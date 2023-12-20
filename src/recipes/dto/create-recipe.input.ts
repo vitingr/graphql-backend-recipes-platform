@@ -9,18 +9,24 @@ export class CreateRecipeInput {
   @Field()
   description: string;
 
-  @Field(type => [String])
+  @Field((type) => [String])
   ingredients: string[];
 
-  @Field(type => [String])
+  @Field((type) => [String])
   methods: string[];
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   photo: string;
 
   @Field()
   creatorId: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
+  creatorPhoto: string;
+
+  @Field()
+  creatorName: string;
+
+  @Field({ nullable: true })
   type: string;
 }

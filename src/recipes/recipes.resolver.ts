@@ -10,28 +10,31 @@ export class RecipesResolver {
 
   @Mutation(() => Recipe)
   createRecipe(@Args('createRecipeInput') createRecipeInput: CreateRecipeInput) {
-    console.log(createRecipeInput)
-    console.log(this.createRecipe)
     return this.recipesService.create(createRecipeInput);
   }
 
-  @Query(() => [Recipe], { name: 'recipes' })
+  @Query(returns => [Recipe], { name: 'recipes' })
   findAll() {
     return this.recipesService.findAll();
   }
 
-  @Query(() => Recipe, { name: 'recipe' })
-  findOne(@Args('id', { type: () => Int }) id: string) {
+  @Query(returns => Recipe, { name: 'recipe' })
+  getRecipe(@Args('id', { type: () => String }) id: string) {
     return this.recipesService.findOne(id);
   }
 
-  @Mutation(() => Recipe)
+  @Mutation(returns => Recipe)
   updateRecipe(@Args('updateRecipeInput') updateRecipeInput: UpdateRecipeInput) {
     return this.recipesService.update(updateRecipeInput.id, updateRecipeInput);
   }
 
-  @Mutation(() => Recipe)
+  @Mutation(returns => Recipe)
   removeRecipe(@Args('id', { type: () => Int }) id: string) {
     return this.recipesService.remove(id);
+  }
+
+  @Query(returns => [Recipe])
+  getUserRecipes(@Args('id', {type: () => String}) id: string) {
+    return this.recipesService.getUserRecipes(id)
   }
 }
