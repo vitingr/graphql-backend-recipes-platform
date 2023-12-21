@@ -6,8 +6,7 @@ import { Comment } from './entities/comment.entity';
 
 @Injectable()
 export class CommentsService {
-
-  constructor (private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
   create(createCommentInput: CreateCommentInput): Promise<Comment> {
     const newComment = this.prisma.comment.create({
@@ -23,9 +22,9 @@ export class CommentsService {
   findOne(id: string): Promise<Comment> {
     return this.prisma.comment.findUnique({
       where: {
-        id: id
-      }
-    })
+        id: id,
+      },
+    });
   }
 
   update(id: number, updateCommentInput: UpdateCommentInput) {
@@ -35,25 +34,25 @@ export class CommentsService {
   remove(id: string): Promise<void> {
     this.prisma.recipe.delete({
       where: {
-        id: id
-      }
-    })
-    return
+        id: id,
+      },
+    });
+    return;
   }
 
   findRecipeCommentaries(id: string): Promise<Comment[]> {
-    return this.prisma.comment.findMany({ 
+    return this.prisma.comment.findMany({
       where: {
-        recipeId: id
-      }
-    })
+        recipeId: id,
+      },
+    });
   }
 
   findUserCommentaries(id: string): Promise<Comment[]> {
     return this.prisma.comment.findMany({
       where: {
-        creatorId: id
-      }
-    })
+        creatorId: id,
+      },
+    });
   }
 }

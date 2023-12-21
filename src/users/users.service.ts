@@ -8,58 +8,57 @@ import { UpdateBio } from './dto/update-bio';
 
 @Injectable()
 export class UsersService {
-
-  constructor (private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
   createNewUser(CreateUser: CreateUser): Promise<User> {
     const newUser = this.prisma.user.create({
-      data: CreateUser
-    })
-    return newUser
+      data: CreateUser,
+    });
+    return newUser;
   }
 
   findAll(): Promise<User[]> {
-    return this.prisma.user.findMany()
+    return this.prisma.user.findMany();
   }
 
   findOne(email: string): Promise<User> {
     return this.prisma.user.findUnique({
       where: {
-        email: email
-      }
-    })
+        email: email,
+      },
+    });
   }
 
   getRecipes(id: string): Promise<Recipe[]> {
     const recipes = this.prisma.recipe.findMany({
       where: {
-        creatorId: id
-      }
-    })
-    return recipes
+        creatorId: id,
+      },
+    });
+    return recipes;
   }
 
   updateUser(UpdateUser: UpdateUser): Promise<User> {
     const updateUser = this.prisma.user.update({
       where: {
-        id: UpdateUser.id
+        id: UpdateUser.id,
       },
       data: {
-        partner: true
-      }
-    })
-    return updateUser
+        partner: true,
+      },
+    });
+    return updateUser;
   }
 
   updateBio(UpdateBio: UpdateBio): Promise<User> {
     const updateBio = this.prisma.user.update({
       where: {
-        id: UpdateBio.id
+        id: UpdateBio.id,
       },
       data: {
-        bio: UpdateBio.bio
-      }
-    })
-    return updateBio
-  } 
+        bio: UpdateBio.bio,
+      },
+    });
+    return updateBio;
+  }
 }

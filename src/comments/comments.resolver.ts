@@ -8,24 +8,24 @@ import { UpdateCommentInput } from './dto/update-comment.input';
 export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
-  @Mutation(returns => Comment)
+  @Mutation((returns) => Comment)
   createComment(
     @Args('createCommentInput') createCommentInput: CreateCommentInput,
   ) {
     return this.commentsService.create(createCommentInput);
   }
 
-  @Query(returns => [Comment], { name: 'comments' })
+  @Query((returns) => [Comment], { name: 'comments' })
   findAll() {
     return this.commentsService.findAll();
   }
 
-  @Query(returns => Comment, { name: 'comment' })
+  @Query((returns) => Comment, { name: 'comment' })
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.commentsService.findOne(id);
   }
 
-  @Mutation(returns => Comment)
+  @Mutation((returns) => Comment)
   updateComment(
     @Args('updateCommentInput') updateCommentInput: UpdateCommentInput,
   ) {
@@ -35,18 +35,18 @@ export class CommentsResolver {
     );
   }
 
-  @Mutation(returns => Comment)
+  @Mutation((returns) => Comment)
   removeComment(@Args('id', { type: () => String }) id: string) {
     return this.commentsService.remove(id);
   }
 
-  @Query(returns => [Comment])
-  findRecipeCommentaries(@Args('id', {type: () => String}) id: string) {
-    return this.commentsService.findRecipeCommentaries(id)
+  @Query((returns) => [Comment])
+  findRecipeCommentaries(@Args('id', { type: () => String }) id: string) {
+    return this.commentsService.findRecipeCommentaries(id);
   }
 
-  @Query(returns => [Comment])
-  findUserCommentaries(@Args('id', {type: () => String}) id: string) {
-    return this.commentsService.findUserCommentaries(id)
+  @Query((returns) => [Comment])
+  findUserCommentaries(@Args('id', { type: () => String }) id: string) {
+    return this.commentsService.findUserCommentaries(id);
   }
 }

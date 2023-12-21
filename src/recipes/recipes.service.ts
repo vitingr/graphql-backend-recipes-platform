@@ -6,7 +6,6 @@ import { Recipe } from '@prisma/client';
 
 @Injectable()
 export class RecipesService {
-
   constructor(private prisma: PrismaService) {}
 
   create(createRecipeInput: CreateRecipeInput): Promise<Recipe> {
@@ -50,42 +49,42 @@ export class RecipesService {
   getUserRecipes(id: string): Promise<Recipe[]> {
     return this.prisma.recipe.findMany({
       where: {
-        creatorId: id
-      }
-    })
+        creatorId: id,
+      },
+    });
   }
 
   likeRecipe(userId: string, recipeId: string): Promise<Recipe> {
     return this.prisma.recipe.update({
       where: {
-        id: recipeId
-      }, 
+        id: recipeId,
+      },
       data: {
         likes: {
-          push: userId
+          push: userId,
         },
-        qtdLikes: {increment: 1}
-      }
-    })
+        qtdLikes: { increment: 1 },
+      },
+    });
   }
 
   async dislikeRecipe(userId: string, recipeId: string): Promise<Recipe> {
     const recipe = await this.prisma.recipe.findUnique({
       where: {
-        id: recipeId
-      }
-    })
-    
+        id: recipeId,
+      },
+    });
+
     return this.prisma.recipe.update({
       where: {
-        id: recipeId
+        id: recipeId,
       },
       data: {
         likes: {
-          set: recipe.likes.filter((userId) => userId !== userId)
+          set: recipe.likes.filter((userId) => userId !== userId),
         },
-        qtdLikes: {decrement: 1}
-      }
-    })
+        qtdLikes: { decrement: 1 },
+      },
+    });
   }
 }

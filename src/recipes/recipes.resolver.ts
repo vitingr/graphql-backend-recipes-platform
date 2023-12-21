@@ -11,42 +11,52 @@ export class RecipesResolver {
   constructor(private readonly recipesService: RecipesService) {}
 
   @Mutation(() => Recipe)
-  createRecipe(@Args('createRecipeInput') createRecipeInput: CreateRecipeInput) {
+  createRecipe(
+    @Args('createRecipeInput') createRecipeInput: CreateRecipeInput,
+  ) {
     return this.recipesService.create(createRecipeInput);
   }
 
-  @Query(returns => [Recipe], { name: 'recipes' })
+  @Query((returns) => [Recipe], { name: 'recipes' })
   findAll() {
     return this.recipesService.findAll();
   }
 
-  @Query(returns => Recipe, { name: 'recipe' })
+  @Query((returns) => Recipe, { name: 'recipe' })
   getRecipe(@Args('id', { type: () => String }) id: string) {
     return this.recipesService.findOne(id);
   }
 
-  @Mutation(returns => Recipe)
-  updateRecipe(@Args('updateRecipeInput') updateRecipeInput: UpdateRecipeInput) {
+  @Mutation((returns) => Recipe)
+  updateRecipe(
+    @Args('updateRecipeInput') updateRecipeInput: UpdateRecipeInput,
+  ) {
     return this.recipesService.update(updateRecipeInput.id, updateRecipeInput);
   }
 
-  @Mutation(returns => Recipe)
+  @Mutation((returns) => Recipe)
   removeRecipe(@Args('id', { type: () => Int }) id: string) {
     return this.recipesService.remove(id);
   }
 
-  @Query(returns => [Recipe])
-  getUserRecipes(@Args('id', {type: () => String}) id: string) {
-    return this.recipesService.getUserRecipes(id)
+  @Query((returns) => [Recipe])
+  getUserRecipes(@Args('id', { type: () => String }) id: string) {
+    return this.recipesService.getUserRecipes(id);
   }
 
-  @Mutation(returns => Recipe)
+  @Mutation((returns) => Recipe)
   likeRecipe(@Args('likeRecipe') likeRecipeInput: LikeRecipe) {
-    return this.recipesService.likeRecipe(likeRecipeInput.userId, likeRecipeInput.recipeId)
+    return this.recipesService.likeRecipe(
+      likeRecipeInput.userId,
+      likeRecipeInput.recipeId,
+    );
   }
 
-  @Mutation(returns => Recipe) 
+  @Mutation((returns) => Recipe)
   dislikeRecipe(@Args('dislikeRecipe') dislikeRecipeInput: DislikeRecipe) {
-    return this.recipesService.dislikeRecipe(dislikeRecipeInput.userId, dislikeRecipeInput.recipeId)
+    return this.recipesService.dislikeRecipe(
+      dislikeRecipeInput.userId,
+      dislikeRecipeInput.recipeId,
+    );
   }
 }
