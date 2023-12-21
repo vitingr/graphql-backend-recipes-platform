@@ -3,6 +3,8 @@ import { RecipesService } from './recipes.service';
 import { Recipe } from './entities/recipe.entity';
 import { CreateRecipeInput } from './dto/create-recipe.input';
 import { UpdateRecipeInput } from './dto/update-recipe.input';
+import { LikeRecipe } from './dto/like-recipe';
+import { DislikeRecipe } from './dto/unlike-recipe';
 
 @Resolver(() => Recipe)
 export class RecipesResolver {
@@ -36,5 +38,15 @@ export class RecipesResolver {
   @Query(returns => [Recipe])
   getUserRecipes(@Args('id', {type: () => String}) id: string) {
     return this.recipesService.getUserRecipes(id)
+  }
+
+  @Mutation(returns => Recipe)
+  likeRecipe(@Args('likeRecipe') likeRecipeInput: LikeRecipe) {
+    return this.recipesService.likeRecipe(likeRecipeInput.userId, likeRecipeInput.recipeId)
+  }
+
+  @Mutation(returns => Recipe) 
+  dislikeRecipe(@Args('dislikeRecipe') dislikeRecipeInput: DislikeRecipe) {
+    return this.recipesService.dislikeRecipe(dislikeRecipeInput.userId, dislikeRecipeInput.recipeId)
   }
 }

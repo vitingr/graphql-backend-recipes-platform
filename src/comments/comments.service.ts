@@ -42,9 +42,17 @@ export class CommentsService {
   }
 
   findRecipeCommentaries(id: string): Promise<Comment[]> {
-    return this.prisma.comment.findMany({
+    return this.prisma.comment.findMany({ 
       where: {
         recipeId: id
+      }
+    })
+  }
+
+  findUserCommentaries(id: string): Promise<Comment[]> {
+    return this.prisma.comment.findMany({
+      where: {
+        creatorId: id
       }
     })
   }

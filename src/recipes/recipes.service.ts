@@ -54,4 +54,38 @@ export class RecipesService {
       }
     })
   }
+
+  likeRecipe(userId: string, recipeId: string): Promise<Recipe> {
+    return this.prisma.recipe.update({
+      where: {
+        id: recipeId
+      }, 
+      data: {
+        likes: {
+          push: userId
+        },
+        qtdLikes: {increment: 1}
+      }
+    })
+  }
+
+  async dislikeRecipe(userId: string, recipeId: string): Promise<Recipe> {
+    const recipe = await this.prisma.recipe.findUnique({
+      where: {
+        id: recipeId
+      }
+    })
+    
+    return this.prisma.recipe.update({
+      where: {
+        id: recipeId
+      },
+      data: {
+        likes: {
+          set: recipe.likes.filter((userId) => userId !== userId)
+        },
+        qtdLikes: {decrement: 1}
+      }
+    })
+  }
 }

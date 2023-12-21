@@ -58,6 +58,7 @@ type Query {
   comments: [Comment!]!
   comment(id: String!): Comment!
   findRecipeCommentaries(id: String!): [Comment!]!
+  findUserCommentaries(id: String!): [Comment!]!
 }
 
 type Mutation {
@@ -67,6 +68,8 @@ type Mutation {
   createRecipe(createRecipeInput: CreateRecipeInput!): Recipe!
   updateRecipe(updateRecipeInput: UpdateRecipeInput!): Recipe!
   removeRecipe(id: Int!): Recipe!
+  likeRecipe(likeRecipe: LikeRecipe!): Recipe!
+  dislikeRecipe(dislikeRecipe: DislikeRecipe!): Recipe!
   createComment(createCommentInput: CreateCommentInput!): Comment!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   removeComment(id: String!): Comment!
@@ -112,6 +115,16 @@ input UpdateRecipeInput {
   creatorName: String
   type: String
   id: String!
+}
+
+input LikeRecipe {
+  userId: String!
+  recipeId: String!
+}
+
+input DislikeRecipe {
+  userId: String!
+  recipeId: String!
 }
 
 input CreateCommentInput {

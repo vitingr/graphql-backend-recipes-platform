@@ -44,4 +44,9 @@ export class CommentsResolver {
   findRecipeCommentaries(@Args('id', {type: () => String}) id: string) {
     return this.commentsService.findRecipeCommentaries(id)
   }
+
+  @Query(returns => [Comment])
+  findUserCommentaries(@Args('id', {type: () => String}) id: string) {
+    return this.commentsService.findUserCommentaries(id)
+  }
 }
