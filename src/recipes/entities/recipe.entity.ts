@@ -24,6 +24,9 @@ export class Recipe {
   @Field(type => Int)
   qtdLikes: number;
 
+  @Field(type => [String])
+  likes: string[];
+
   @Field()
   creatorId: string;
 

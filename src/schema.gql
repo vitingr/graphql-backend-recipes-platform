@@ -10,6 +10,7 @@ type Recipe {
   methods: [String!]!
   photo: String!
   qtdLikes: Int!
+  likes: [String!]!
   creatorId: String!
   creatorPhoto: String!
   creatorName: String!
@@ -55,6 +56,7 @@ type Query {
   recipes: [Recipe!]!
   recipe(id: String!): Recipe!
   getUserRecipes(id: String!): [Recipe!]!
+  getUserFavouriteRecipes(id: String!): Recipe!
   comments: [Comment!]!
   comment(id: String!): Comment!
   findRecipeCommentaries(id: String!): [Comment!]!

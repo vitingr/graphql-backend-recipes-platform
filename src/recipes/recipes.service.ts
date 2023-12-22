@@ -87,4 +87,14 @@ export class RecipesService {
       },
     });
   }
+
+  async getUserFavouriteRecipes(id: string): Promise<Recipe[]> {
+    return this.prisma.recipe.findMany({
+      where: {
+        likes: {
+          has: id as string
+        }
+      }
+    })
+  }
 }

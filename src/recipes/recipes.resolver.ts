@@ -59,4 +59,9 @@ export class RecipesResolver {
       dislikeRecipeInput.recipeId,
     );
   }
+
+  @Query((returns) => Recipe)
+  getUserFavouriteRecipes(@Args('id', { type: () => String }) id: string) {
+    return this.recipesService.getUserFavouriteRecipes(id);
+  }
 }
