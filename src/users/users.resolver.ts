@@ -12,6 +12,7 @@ import {
 } from '@nestjs/graphql';
 import { UpdateUser } from './dto/update-user';
 import { UpdateBio } from './dto/update-bio';
+import { UpdatePartner } from './dto/update-partner';
 
 @Resolver((of) => User)
 export class UsersResolver {
@@ -38,12 +39,17 @@ export class UsersResolver {
   }
 
   @Mutation((returns) => User)
-  updateUser(@Args('updateUser') updateUser: UpdateUser): Promise<User> {
+  updateUser(@Args('updateUser') updateUser: UpdatePartner): Promise<User> {
     return this.usersService.updateUser(updateUser);
   }
 
   @Mutation((returns) => User)
   updateBio(@Args('updateBio') updateBio: UpdateBio): Promise<User> {
     return this.usersService.updateBio(updateBio);
+  }
+
+  @Mutation((returns) => User)
+  updateUserInfo(@Args('updateUserInfo') updateUserInfo: UpdateUser): Promise<User> {
+    return this.usersService.updateUserInfo(updateUserInfo)
   }
 }

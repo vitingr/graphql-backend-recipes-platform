@@ -65,8 +65,9 @@ type Query {
 
 type Mutation {
   createNewUser(createUser: CreateUser!): User!
-  updateUser(updateUser: UpdateUser!): User!
+  updateUser(updateUser: UpdatePartner!): User!
   updateBio(updateBio: UpdateBio!): User!
+  updateUserInfo(updateUserInfo: UpdateUser!): User!
   createRecipe(createRecipeInput: CreateRecipeInput!): Recipe!
   updateRecipe(updateRecipeInput: UpdateRecipeInput!): Recipe!
   removeRecipe(id: Int!): Recipe!
@@ -85,12 +86,20 @@ input CreateUser {
   photo: String
 }
 
-input UpdateUser {
+input UpdatePartner {
   id: String!
 }
 
 input UpdateBio {
   id: String!
+  bio: String!
+}
+
+input UpdateUser {
+  id: String!
+  firstname: String!
+  lastname: String!
+  name: String!
   bio: String!
 }
 

@@ -5,6 +5,7 @@ import { User } from './user-entity';
 import { Recipe } from '@prisma/client';
 import { UpdateUser } from './dto/update-user';
 import { UpdateBio } from './dto/update-bio';
+import { UpdatePartner } from './dto/update-partner';
 
 @Injectable()
 export class UsersService {
@@ -38,7 +39,7 @@ export class UsersService {
     return recipes;
   }
 
-  updateUser(UpdateUser: UpdateUser): Promise<User> {
+  updateUser(UpdateUser: UpdatePartner): Promise<User> {
     const updateUser = this.prisma.user.update({
       where: {
         id: UpdateUser.id,
@@ -60,5 +61,20 @@ export class UsersService {
       },
     });
     return updateBio;
+  }
+
+  updateUserInfo(updateUserInfo: UpdateUser): Promise<User> {
+    const updateUser = this.prisma.user.update({
+      where: {  
+        id: updateUserInfo.id,
+      },
+      data: {
+        name: updateUserInfo.name,
+        firstname: updateUserInfo.firstname,
+        lastname: updateUserInfo.lastname,
+        bio: updateUserInfo.bio,
+      },
+    });
+    return updateUser;
   }
 }
