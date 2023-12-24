@@ -13,6 +13,7 @@ import {
 import { UpdateUser } from './dto/update-user';
 import { UpdateBio } from './dto/update-bio';
 import { UpdatePartner } from './dto/update-partner';
+import { UpdateUserPhoto } from './dto/update-photo';
 
 @Resolver((of) => User)
 export class UsersResolver {
@@ -51,5 +52,10 @@ export class UsersResolver {
   @Mutation((returns) => User)
   updateUserInfo(@Args('updateUserInfo') updateUserInfo: UpdateUser): Promise<User> {
     return this.usersService.updateUserInfo(updateUserInfo)
+  }
+
+  @Mutation((returns) => User)
+  updateUserPhoto(@Args('updateUserPhoto') updateUserPhoto: UpdateUserPhoto): Promise<User> {
+    return this.usersService.updateUserPhoto(updateUserPhoto)
   }
 }

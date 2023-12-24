@@ -16,4 +16,7 @@ export class UpdateUser {
 
   @Field()
   bio: string;
+
+  @Field()
+  photo: string;
 }

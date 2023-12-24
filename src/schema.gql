@@ -68,6 +68,7 @@ type Mutation {
   updateUser(updateUser: UpdatePartner!): User!
   updateBio(updateBio: UpdateBio!): User!
   updateUserInfo(updateUserInfo: UpdateUser!): User!
+  updateUserPhoto(updateUserPhoto: UpdateUserPhoto!): User!
   createRecipe(createRecipeInput: CreateRecipeInput!): Recipe!
   updateRecipe(updateRecipeInput: UpdateRecipeInput!): Recipe!
   removeRecipe(id: Int!): Recipe!
@@ -101,6 +102,12 @@ input UpdateUser {
   lastname: String!
   name: String!
   bio: String!
+  photo: String!
+}
+
+input UpdateUserPhoto {
+  id: String!
+  photo: String!
 }
 
 input CreateRecipeInput {
