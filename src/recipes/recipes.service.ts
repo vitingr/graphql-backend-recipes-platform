@@ -92,9 +92,27 @@ export class RecipesService {
     return this.prisma.recipe.findMany({
       where: {
         likes: {
-          has: id as string
-        }
-      }
-    })
+          has: id as string,
+        },
+      },
+    });
+  }
+
+  async searchRecipe(string: string): Promise<Recipe[]> {
+    return this.prisma.recipe.findMany({
+      where: {
+        title: {
+          contains: string,
+        },
+      },
+    });
+  }
+
+  searchRecipeType(type: string): Promise<Recipe[]> {
+    return this.prisma.recipe.findMany({
+      where: {
+        type: type,
+      },
+    });
   }
 }

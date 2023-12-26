@@ -52,11 +52,14 @@ scalar DateTime
 
 type Query {
   getUser(email: String!): User!
+  getUserById(id: String!): User!
   users: [User!]!
   recipes: [Recipe!]!
   recipe(id: String!): Recipe!
   getUserRecipes(id: String!): [Recipe!]!
   getUserFavouriteRecipes(id: String!): Recipe!
+  searchRecipe(string: String!): [Recipe!]!
+  searchRecipeType(type: String!): [Recipe!]!
   comments: [Comment!]!
   comment(id: String!): Comment!
   findRecipeCommentaries(id: String!): [Comment!]!

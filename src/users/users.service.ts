@@ -7,6 +7,7 @@ import { UpdateUser } from './dto/update-user';
 import { UpdateBio } from './dto/update-bio';
 import { UpdatePartner } from './dto/update-partner';
 import { UpdateUserPhoto } from './dto/update-photo';
+import { Comment } from 'src/comments/entities/comment.entity';
 
 @Injectable()
 export class UsersService {
@@ -27,6 +28,14 @@ export class UsersService {
     return this.prisma.user.findUnique({
       where: {
         email: email,
+      },
+    });
+  }
+
+  findById(id: string): Promise<User> {
+    return this.prisma.user.findUnique({
+      where: {
+        id: id,
       },
     });
   }
@@ -64,9 +73,9 @@ export class UsersService {
     return updateBio;
   }
 
-  updateUserInfo(updateUserInfo: UpdateUser): Promise<User> {
-    const updateUser = this.prisma.user.update({
-      where: {  
+  async updateUserInfo(updateUserInfo: UpdateUser): Promise<User> {
+    const updateUser = await this.prisma.user.update({
+      where: {
         id: updateUserInfo.id,
       },
       data: {
@@ -74,21 +83,44 @@ export class UsersService {
         firstname: updateUserInfo.firstname,
         lastname: updateUserInfo.lastname,
         bio: updateUserInfo.bio,
-        photo: updateUserInfo.photo
+        photo: updateUserInfo.photo,
       },
     });
+
+    await this.updateContent(
+      updateUserInfo.id,
+      updateUserInfo.photo,
+      updateUserInfo.name,
+    );
+
     return updateUser;
+  }
+
+  async updateContent(
+    id: string,
+    userPhoto: string,
+    name: string,
+  ): Promise<void> {
+    const postsUpdated = await this.prisma.comment.updateMany({
+      where: {
+        creatorId: id,
+      },
+      data: {
+        creatorPhoto: userPhoto,
+        creatorName: name,
+      },
+    });
   }
 
   updateUserPhoto(updateUserPhoto: UpdateUserPhoto): Promise<User> {
     const updateUser = this.prisma.user.update({
       where: {
-        id: updateUserPhoto.id
+        id: updateUserPhoto.id,
       },
       data: {
-        photo: updateUserPhoto.photo
-      }
-    })
-    return updateUser
+        photo: updateUserPhoto.photo,
+      },
+    });
+    return updateUser;
   }
 }

@@ -64,4 +64,14 @@ export class RecipesResolver {
   getUserFavouriteRecipes(@Args('id', { type: () => String }) id: string) {
     return this.recipesService.getUserFavouriteRecipes(id);
   }
+
+  @Query((returns) => [Recipe])
+  searchRecipe(@Args('string', { type: () => String }) string: string) {
+    return this.recipesService.searchRecipe(string);
+  }
+
+  @Query((returns) => [Recipe])
+  searchRecipeType(@Args('type', { type: () => String }) type: string) {
+    return this.recipesService.searchRecipeType(type);
+  }
 }

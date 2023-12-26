@@ -24,6 +24,11 @@ export class UsersResolver {
     return this.usersService.findOne(email);
   }
 
+  @Query((returns) => User)
+  getUserById(@Args('id', { type: () => String }) id: string): Promise<User> {
+    return this.usersService.findById(id);
+  }
+
   @Query((returns) => [User])
   users(): Promise<User[]> {
     return this.usersService.findAll();
@@ -50,12 +55,16 @@ export class UsersResolver {
   }
 
   @Mutation((returns) => User)
-  updateUserInfo(@Args('updateUserInfo') updateUserInfo: UpdateUser): Promise<User> {
-    return this.usersService.updateUserInfo(updateUserInfo)
+  updateUserInfo(
+    @Args('updateUserInfo') updateUserInfo: UpdateUser,
+  ): Promise<User> {
+    return this.usersService.updateUserInfo(updateUserInfo);
   }
 
   @Mutation((returns) => User)
-  updateUserPhoto(@Args('updateUserPhoto') updateUserPhoto: UpdateUserPhoto): Promise<User> {
-    return this.usersService.updateUserPhoto(updateUserPhoto)
+  updateUserPhoto(
+    @Args('updateUserPhoto') updateUserPhoto: UpdateUserPhoto,
+  ): Promise<User> {
+    return this.usersService.updateUserPhoto(updateUserPhoto);
   }
 }
