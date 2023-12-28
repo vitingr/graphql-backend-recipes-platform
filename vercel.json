@@ -4,7 +4,12 @@
     {
       "src": "dist/main.js",
       "use": "@vercel/node",
-      "config": { "maxLambdaSize": "2048MB" }
+      "config": { 
+        "maxLambdaSize": "2048MB",
+        "includeFiles": [
+          "dist/schemas/**/*.graphql"
+        ] 
+      }
     }
   ],
   "routes": [
@@ -12,5 +17,8 @@
       "src": "/(.*)",
       "dest": "dist/main.js"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "mongodb+srv://vitorgabrielsbo1460:xXzMW9c0UljiQykk@aprendendo.cmdbthe.mongodb.net/recipes-platform?retryWrites=true&w=majority"
+  }
 }
